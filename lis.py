@@ -1,4 +1,3 @@
-# Author: Kshitij Grover
 # Longest Increasing Subsequence
 
 test_arr_1 = [1, 3, 5, 4, 6, 9, 15, 3, 1, 10, 13, 15, 19]
@@ -7,30 +6,29 @@ test_arr_3 = []
 test_arr_4 = [0, 0, 0]
 test_arr_5 = [1, 2, 3, 0]
 
+# DP O(n^2) solution
+def get_lis_dp(arr):
+    
+    lis = [1] * len(arr)
+    
+    for i in range (0, len(arr)):
+        for j in range(0, i):
+            if (arr[i] > arr[j]):
+                if (lis[i] < lis[j] + 1):
+                    lis[i] = lis[j] + 1
         
-def get_lis(arr):
-    if(len(arr) == 0):
-        return -1
+    max_lis = 1
+    for index in range (0, len(lis)):
+        if (lis[index] > max_lis):
+            max_lis = lis[index]
     
-    # keeps track of max length found so far
-    max_length = 0
-    # length of current sequence, 1 because 
-    # we start after the first element. 
-    length_so_far = 1
-    
-    for i in range (1, len(arr)):
-        if (arr[i] > arr[i-1]):
-            length_so_far += 1
-        else:
-            length_so_far = 0
-    
-        if (length_so_far > max_length):
-            max_length = length_so_far
-            
-    return max(max_length, 1)
+    return max_lis
 
-print get_lis(test_arr_1)
-print get_lis(test_arr_2)
-print get_lis(test_arr_3)
-print get_lis(test_arr_4)
-print get_lis(test_arr_5)
+    
+
+
+print get_lis_dp(test_arr_1)
+print get_lis_dp(test_arr_2)
+print get_lis_dp(test_arr_3)
+print get_lis_dp(test_arr_4)
+print get_lis_dp(test_arr_5)
